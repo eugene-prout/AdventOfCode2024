@@ -1,8 +1,8 @@
 from pathlib import Path
-from typing import Any, Generator
+from typing import Generator
 
 
-def stream_input(file_path: Path) -> Generator[tuple[int, ...], Any, Any]:
+def stream_input(file_path: Path) -> Generator[tuple[int, ...], None, None]:
     """
     Reads a file containing 2 columns and an answer into a structured format.
 
@@ -28,7 +28,7 @@ def stream_input(file_path: Path) -> Generator[tuple[int, ...], Any, Any]:
             yield parsed_line
 
 
-def is_report_safe(l: tuple[int, ...]):
+def is_report_safe(l: tuple[int, ...]) -> bool:
     increasing = l[0] < l[1]
     for prev, next in zip(l, l[1:]):
         if abs(next - prev) < 1 or abs(next - prev) > 3:
@@ -40,7 +40,7 @@ def is_report_safe(l: tuple[int, ...]):
     return True
 
 
-def get_one_element_removed[T](l: list[T]) -> Generator[tuple[T, ...], Any, Any]:
+def get_one_element_removed[T](l: list[T]) -> Generator[tuple[T, ...], None, None]:
     """
     Returns all possible lists after removing 1 element from the input list.
     """
@@ -50,7 +50,7 @@ def get_one_element_removed[T](l: list[T]) -> Generator[tuple[T, ...], Any, Any]
         yield tuple(temp)
 
 
-def part_1():
+def part_1() -> int:
     reports = stream_input(Path("p1.txt"))
     return sum(is_report_safe(report) for report in reports)
 

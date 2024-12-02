@@ -1,9 +1,9 @@
 from collections import Counter
 from pathlib import Path
-from typing import Any, Generator
+from typing import Generator
 
 
-def stream_input(file_path: Path) -> Generator[tuple[int, int], Any, Any]:
+def stream_input(file_path: Path) -> Generator[tuple[int, int], None, None]:
     """
     Reads a file containing 2 columns and an answer into a structured format.
 
@@ -31,14 +31,14 @@ def stream_input(file_path: Path) -> Generator[tuple[int, int], Any, Any]:
             yield parsed_line
 
 
-def part1():
+def part1() -> None:
     input_lines = list(stream_input(Path("p1.txt")))
     left_list, right_list = map(sorted, list(zip(*input_lines)))
 
     print(sum(abs(left_list[i] - right_list[i]) for i in range(len(left_list))))
 
 
-def part2():
+def part2() -> None:
     input_lines = list(stream_input(Path("p1.txt")))
     left_list, right_list = map(sorted, list(zip(*input_lines)))
 
